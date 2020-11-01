@@ -1,4 +1,4 @@
 dotnet restore
 dotnet lambda package --configuration release --framework netcoreapp3.1 --output-package build/deploy-package.zip
 
-sls deploy
+npm run deploy

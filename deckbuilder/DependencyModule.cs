@@ -2,6 +2,8 @@
 {
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
+    using deckbuilder.DataAccess;
+    using deckbuilder.DataAccess.Interfaces;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
@@ -48,7 +50,7 @@
             //Inject Libraries
             // example
             // builder.RegisterType<IMPLEMENTATION>().As<INTERFACE>().SingleInstance();
-            //builder.RegisterType<S3Access>().As<IS3Access>().SingleInstance();
+            builder.RegisterType<DeckBuilderRepository>().As<IDeckBuilderRepository>().SingleInstance();
         }
     }
 }

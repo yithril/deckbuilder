@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "description": "deckbuilder",
   "scripts": {
-    "sls": "./node_modules/.bin/serverless"
+    "serverless": "./node_modules/.bin/serverless",
+    "domain": "npm run serverless create_domain --stage=test",
+    "domain:prod": "npm run serverless create_domain --stage=prod",
+    "deploy": "npm run serverless deploy --stage=test",
+    "deploy:prod": "npm run serverless deploy --stage=prod",
+    "package": "npm run serverless package --stage=prod"
   },
   "repository": {
     "type": "git",

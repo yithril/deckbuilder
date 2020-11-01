@@ -12,11 +12,11 @@ namespace deckbuilder.Handlers
     using System;
     using System.Net;
 
-    public class ExampleApiHandler
+    public class DeckBuilderApiHandlers
     {
         private ILogger _logger;
 
-        public ExampleApiHandler()
+        public DeckBuilderApiHandlers()
         {
             var container = DependencyModule.BuildContainer();
             ResolveDependencies(container);
@@ -57,7 +57,7 @@ namespace deckbuilder.Handlers
         /// <param name="container"></param>
         private void ResolveDependencies(IContainer container)
         {
-            _logger = container.Resolve<ILogger<ExampleApiHandler>>();
+            _logger = container.Resolve<ILogger<DeckBuilderApiHandlers>>();
         }
     }
 }
