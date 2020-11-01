@@ -74,7 +74,7 @@ namespace deckbuilder.Handlers
         private void ResolveDependencies(IContainer container)
         {
             _logger = container.Resolve<ILogger<DeckBuilderApiHandlers>>();
-            _deckBuilderRepository = container.Resolve<IDeckBuilderRepository<DeckBuilderApiHandlers>>();
+            _deckBuilderRepository = container.Resolve<IDeckBuilderRepository>();
         }
     }
 }
