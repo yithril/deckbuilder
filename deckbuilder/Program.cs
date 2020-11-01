@@ -1,4 +1,5 @@
-﻿using System;
+﻿using deckbuilder.Handlers;
+using System;
 
 namespace deckbuilder
 {
@@ -7,6 +8,8 @@ namespace deckbuilder
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            var b = new DeckBuilderApiHandlers();
+            
         }
     }
 }

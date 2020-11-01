@@ -12,7 +12,6 @@ namespace deckbuilder.Handlers
     using System;
     using System.Net;
     using deckbuilder.BusinessLogic.Interfaces;
-    using deckbuilder.BusinessLogic;
 
     public class DeckBuilderApiHandlers
     {
@@ -55,7 +54,7 @@ namespace deckbuilder.Handlers
                 }
                 catch(Exception e)
                 {
-                    _logger.LogError(e.InnerException.ToString());
+                    _logger.LogError(e.Message.ToString());
                 }
                 
 
@@ -71,7 +70,7 @@ namespace deckbuilder.Handlers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.InnerException.ToString());
+                _logger.LogError(ex.Message);
                 throw new Exception("Error with hello world: ", ex);
             }
 
@@ -85,6 +84,7 @@ namespace deckbuilder.Handlers
         private void ResolveDependencies(IContainer container)
         {
             _logger = container.Resolve<ILogger<DeckBuilderApiHandlers>>();
+            _deckService = container.Resolve<IDeckService>();
         }
     }
 }

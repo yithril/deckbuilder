@@ -49,10 +49,9 @@
 
             ConfigureLogging(builder);
 
-            //Inject Libraries
-            // example
-            // builder.RegisterType<IMPLEMENTATION>().As<INTERFACE>().SingleInstance();
             builder.RegisterType<DeckService>().As<IDeckService>().SingleInstance();
+            builder.RegisterType<DeckBuilderRepository>().As<IDeckBuilderRepository>().SingleInstance();
+
         }
     }
 }

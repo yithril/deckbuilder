@@ -9,7 +9,7 @@ provider:
   name: aws
   runtime: dotnetcore3.1
   stage: ${opt:stage, 'test'}
-  profile: ${opt:profile, 'jhop'}
+  profile: ${opt:profile, 'YithrilProfile'}
   logRetentionInDays: 7
   memorySize: 512
   region: us-east-2

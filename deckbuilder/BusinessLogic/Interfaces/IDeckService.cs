@@ -2,7 +2,7 @@
 
 namespace deckbuilder.BusinessLogic.Interfaces
 {
-    interface IDeckService
+    public interface IDeckService
     {
         Deck SaveDeck(Deck deck);
     }
