@@ -12,11 +12,12 @@ namespace deckbuilder.Handlers
     using System;
     using System.Net;
     using deckbuilder.BusinessLogic.Interfaces;
+    using deckbuilder.BusinessLogic;
 
     public class DeckBuilderApiHandlers
     {
-        ILogger _logger;
-        IDeckService _deckService;
+        private ILogger _logger;
+        private IDeckService _deckService;
 
         public DeckBuilderApiHandlers()
         {
@@ -48,10 +49,20 @@ namespace deckbuilder.Handlers
                 //_logger.LogInformation("I am information being logged yay");
                 //return to the api
 
+                try
+                {
+                    var newDeck = JsonConvert.DeserializeObject<Deck>(request.Body);
+                }
+                catch(Exception e)
+                {
+                    _logger.LogError(e.InnerException.ToString());
+                }
+                
+
                 var deck = new Deck()
                 {
                     Id = Guid.NewGuid().ToString(),
-                    DataType = "Deck"
+                    DataType = "Deck",
                 };
 
                 _deckService.SaveDeck(deck);
@@ -60,7 +71,7 @@ namespace deckbuilder.Handlers
             }
             catch (Exception ex)
             {
-                _logger.LogError("I am an error being logged");
+                _logger.LogError(ex.InnerException.ToString());
                 throw new Exception("Error with hello world: ", ex);
             }
 
@@ -74,7 +85,6 @@ namespace deckbuilder.Handlers
         private void ResolveDependencies(IContainer container)
         {
             _logger = container.Resolve<ILogger<DeckBuilderApiHandlers>>();
-            _deckService = container.Resolve<IDeckService>();
         }
     }
 }
