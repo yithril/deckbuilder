@@ -2,6 +2,8 @@
 {
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
+    using deckbuilder.BusinessLogic;
+    using deckbuilder.BusinessLogic.Interfaces;
     using deckbuilder.DataAccess;
     using deckbuilder.DataAccess.Interfaces;
     using Microsoft.Extensions.Configuration;
@@ -50,7 +52,7 @@
             //Inject Libraries
             // example
             // builder.RegisterType<IMPLEMENTATION>().As<INTERFACE>().SingleInstance();
-            builder.RegisterType<DeckBuilderRepository>().As<IDeckBuilderRepository>().SingleInstance();
+            builder.RegisterType<DeckService>().As<IDeckService>().SingleInstance();
         }
     }
 }

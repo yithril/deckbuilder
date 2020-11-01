@@ -11,12 +11,12 @@ namespace deckbuilder.Handlers
     using Newtonsoft.Json;
     using System;
     using System.Net;
-    using deckbuilder.DataAccess.Interfaces;
+    using deckbuilder.BusinessLogic.Interfaces;
 
     public class DeckBuilderApiHandlers
     {
         ILogger _logger;
-        IDeckBuilderRepository _deckBuilderRepository;
+        IDeckService _deckService;
 
         public DeckBuilderApiHandlers()
         {
@@ -54,7 +54,7 @@ namespace deckbuilder.Handlers
                     DataType = "Deck"
                 };
 
-                _deckBuilderRepository.Save(deck);
+                _deckService.SaveDeck(deck);
 
                 res.Deck = deck;
             }
@@ -74,7 +74,7 @@ namespace deckbuilder.Handlers
         private void ResolveDependencies(IContainer container)
         {
             _logger = container.Resolve<ILogger<DeckBuilderApiHandlers>>();
-            _deckBuilderRepository = container.Resolve<IDeckBuilderRepository>();
+            _deckService = container.Resolve<IDeckService>();
         }
     }
 }
