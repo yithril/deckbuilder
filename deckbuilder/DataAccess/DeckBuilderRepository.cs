@@ -1,4 +1,5 @@
-﻿using Amazon.DynamoDBv2;
+﻿using Amazon;
+using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.DocumentModel;
 using deckbuilder.DataAccess.Interfaces;
@@ -16,7 +17,7 @@ namespace deckbuilder.DataAccess
 
         public DeckBuilderRepository(IConfiguration configuration)
         {
-            _dbContext = new DynamoDBContext(new AmazonDynamoDBClient(), new DynamoDBContextConfig() { TableNamePrefix = configuration["DynamoDBTablePrefix"] });
+            _dbContext = new DynamoDBContext(new AmazonDynamoDBClient(RegionEndpoint.USEast2), new DynamoDBContextConfig() { TableNamePrefix = configuration["DynamoDBTablePrefix"] });
             _dconfig = new DynamoDBOperationConfig();
         }
 

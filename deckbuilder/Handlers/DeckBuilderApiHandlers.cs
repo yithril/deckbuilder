@@ -11,10 +11,12 @@ namespace deckbuilder.Handlers
     using Newtonsoft.Json;
     using System;
     using System.Net;
+    using deckbuilder.DataAccess.Interfaces;
 
     public class DeckBuilderApiHandlers
     {
         private ILogger _logger;
+        private IDeckBuilderRepository _deckBuilderRepository;
 
         public DeckBuilderApiHandlers()
         {
@@ -29,18 +31,27 @@ namespace deckbuilder.Handlers
             try
             {
                 // do stuff here
-                var queryStringKeyNameHere = request.QueryStringParameters.ContainsKey("key");
-                var pathStringPathKeyHere = request.PathParameters.ContainsKey("id");
+                //var queryStringKeyNameHere = request.QueryStringParameters.ContainsKey("key");
+                //var pathStringPathKeyHere = request.PathParameters.ContainsKey("id");
                 var requestBody = request.Body;
                 var headers = request.Headers;
-                _logger.LogDebug($"QueryStringParameters: {queryStringKeyNameHere}");
-                _logger.LogDebug($"PathParameters: {pathStringPathKeyHere}");
+                //_logger.LogDebug($"QueryStringParameters: {queryStringKeyNameHere}");
+                //_logger.LogDebug($"PathParameters: {pathStringPathKeyHere}");
                 _logger.LogDebug($"Body: {requestBody}");
-                _logger.LogDebug($"Headers: {headers}");
+                //_logger.LogDebug($"Headers: {headers}");
 
-                _logger.LogInformation("I am information being logged yay");
+                //_logger.LogInformation("I am information being logged yay");
                 //return to the api
-                res.ExampleResponseString = "HelloWorld!";
+
+                var deck = new Deck()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    DataType = "Deck"
+                };
+
+                //_deckBuilderRepository.Save(deck);
+
+                res.Deck = deck;
             }
             catch (Exception ex)
             {

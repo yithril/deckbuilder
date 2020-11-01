@@ -59,11 +59,11 @@ package:
 functions:
   DeckPost:
     name: ${self:custom.deckPostLambdaName}
-    handler: deckbuilder::deckbuilder.Handlers.DeckBuilderApiHandler::Post
+    handler: deckbuilder::deckbuilder.Handlers.DeckBuilderApiHandlers::Post
     description: An example post lambda that will return hello world to you when you post it a message. It also logs everything you pass in
     events:
       - http:
-          path: /test
+          path: /deck
           method: POST
           private: true
 

@@ -3,7 +3,7 @@
     using deckbuilder.Models;
     using System.Collections.Generic;
 
-    interface IDeckBuilderRepository
+    public interface IDeckBuilderRepository
     {
         void Save(Deck deck);
         void Delete(Deck deck);
