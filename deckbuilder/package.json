@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "deckbuilder",
   "scripts": {
-		"sls": "./node_modules/.bin/serverless"
+    "sls": "./node_modules/.bin/serverless"
   },
   "repository": {
     "type": "git",
