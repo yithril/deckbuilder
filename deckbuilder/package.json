@@ -1,0 +1,23 @@
+{
+  "name": "deckbuilder",
+  "version": "0.1.0",
+  "description": "deckbuilder",
+  "scripts": {
+		"sls": "./node_modules/.bin/serverless"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yithril/deckbuilder"
+  },
+  "author": "Michael Cavanaugh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yithril/deckbuilder/issues"
+  },
+  "homepage": "https://github.com/yithril/deckbuilder#readme",
+  "devDependencies": {
+    "global": "^4.4.0",
+    "serverless": "^1.78.0",
+    "serverless-domain-manager": "^4.2.0"
+  }
+}

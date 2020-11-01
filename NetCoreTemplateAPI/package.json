@@ -1,0 +1,23 @@
+{
+  "name": "netcoretemplateapi",
+  "version": "0.1.0",
+  "description": "Template API",
+  "scripts": {
+		"sls": "./node_modules/.bin/serverless"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/funkel1989/NetCoreTemplate-Serverless-Lambda.git"
+  },
+  "author": "Michael Cavanaugh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/funkel1989/NetCoreTemplate-Serverless-Lambda/issues"
+  },
+  "homepage": "https://github.com/funkel1989/NetCoreTemplate-Serverless-Lambda#readme",
+  "devDependencies": {
+    "global": "^4.4.0",
+    "serverless": "^1.78.0",
+    "serverless-domain-manager": "^4.2.0"
+  }
+}

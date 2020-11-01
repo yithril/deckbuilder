@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "9c6f14a0-2687-40e8-90fb-acffcc5ed2a6",
+		"name": "ExampleDotNetAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Example request for token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6328113e-9a68-4eb5-b737-094a9d588a1a",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"client_id\": \"XabAlOM5SdipoaWwFBuT6pzn2zM8cgcy\",\r\n    \"client_secret\": \"eA7Ucyz-cKpXf4PC7b0c7IdoE66bAtMr9rCGkDJFjtogAPM2qdWxfLXZwLvvSQsn\",\r\n    \"audience\": \"dotnetapi-test.cavanaughexamples.com\",\r\n    \"grant_type\": \"client_credentials\"\r\n}"
+				},
+				"url": {
+					"raw": "https://mcavanaugh-example.us.auth0.com/oauth/token",
+					"protocol": "https",
+					"host": [
+						"mcavanaugh-example",
+						"us",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "example request to dotnet api",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad4382d3-c1ef-47cc-a9f6-6d288f988790",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"TestBodyKey\": \"I am a test body string yay\"\r\n}"
+				},
+				"url": {
+					"raw": "https://dotnetapi-test.cavanaughexamples.com/test/id?key=iAmAKey",
+					"protocol": "https",
+					"host": [
+						"dotnetapi-test",
+						"cavanaughexamples",
+						"com"
+					],
+					"path": [
+						"test",
+						"id"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "iAmAKey"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

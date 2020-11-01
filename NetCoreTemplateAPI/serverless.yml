@@ -1,0 +1,72 @@
+
+
+service: DotNet31Template
+
+plugins:
+  - serverless-domain-manager
+
+provider: 
+  name: aws
+  runtime: dotnetcore3.1
+  stage: ${opt:stage, 'test'}
+  profile: ${opt:profile, 'main'}
+  logRetentionInDays: 7
+  memorySize: 512
+  region: us-east-2
+  logs:
+    httpApi: true
+  httpApi:
+    cors: true
+    authorizers:
+      serviceAuthorizer:
+        identitySource: $request.header.Authorization
+        issuerUrl: ${self:custom.Auth0DomainMap.${self:provider.stage}}
+        audience:
+          - ${self:custom.Auth0Audience}
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action: 
+        - 'logs:CreateLogGroup'
+        - 'logs:CreateLogStream'
+        - 'logs:PutLogEvents'
+      Resource: '*'
+
+custom:
+  examplePostLambdaName: ${self:service}-Example-Post-${self:provider.stage}
+  DomainMap:
+    test: 'dotnetapi-test.cavanaughexamples.com'
+    prod: 'dotnetapi.cavanaughexamples.com'
+  CertMap:
+    test: '*.cavanaughexamples.com'
+    prod: '*.cavanaughexamples.com'
+  Auth0Audience: ${ssm:/dotnetapi/${self:provider.stage}/auth0Audience~true}
+  Auth0DomainMap:
+    test: 'https://mcavanaugh-example.us.auth0.com/'
+    prod: 'https://mcavanaugh-example.us.auth0.com/'
+  serverless-offline:
+    host: 0.0.0.0
+  customDomain:
+    domainName: ${self:custom.DomainMap.${self:provider.stage}}
+    certificateName: ${self:custom.CertMap.${self:provider.stage}}
+    createRoute53Record: true
+    endpointType: 'regional'
+    apiType: http
+
+package:
+  artifact: build/deploy-package.zip
+  individually: true
+  excludeDevDependencies: true
+
+functions:
+  examplePost:
+    name: ${self:custom.examplePostLambdaName}
+    handler: NetCoreTemplateAPI::NetCoreTemplateAPI.Handlers.ExampleApiHandler::Post
+    description: An example post lambda that will return hello world to you when you post it a message. It also logs everything you pass in
+    events:
+      - httpApi:
+          path: /test/{id}
+          method: POST
+          authorizer: serviceAuthorizer
+          
