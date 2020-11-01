@@ -15,12 +15,17 @@ namespace deckbuilder.Handlers
 
     public class DeckBuilderApiHandlers
     {
-        private ILogger _logger;
-        private IDeckBuilderRepository _deckBuilderRepository;
+        ILogger _logger;
+        IDeckBuilderRepository _deckBuilderRepository;
 
         public DeckBuilderApiHandlers()
         {
             var container = DependencyModule.BuildContainer();
+            ResolveDependencies(container);
+        }
+
+        public DeckBuilderApiHandlers(IContainer container)
+        {
             ResolveDependencies(container);
         }
 
@@ -37,7 +42,7 @@ namespace deckbuilder.Handlers
                 var headers = request.Headers;
                 //_logger.LogDebug($"QueryStringParameters: {queryStringKeyNameHere}");
                 //_logger.LogDebug($"PathParameters: {pathStringPathKeyHere}");
-                _logger.LogDebug($"Body: {requestBody}");
+                _logger.LogInformation($"Body: {requestBody}");
                 //_logger.LogDebug($"Headers: {headers}");
 
                 //_logger.LogInformation("I am information being logged yay");
@@ -49,7 +54,7 @@ namespace deckbuilder.Handlers
                     DataType = "Deck"
                 };
 
-                //_deckBuilderRepository.Save(deck);
+                _deckBuilderRepository.Save(deck);
 
                 res.Deck = deck;
             }
@@ -69,6 +74,7 @@ namespace deckbuilder.Handlers
         private void ResolveDependencies(IContainer container)
         {
             _logger = container.Resolve<ILogger<DeckBuilderApiHandlers>>();
+            _deckBuilderRepository = container.Resolve<IDeckBuilderRepository<DeckBuilderApiHandlers>>();
         }
     }
 }
