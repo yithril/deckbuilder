@@ -17,7 +17,7 @@ namespace deckbuilder.DataAccess
 
         public DeckBuilderRepository(IConfiguration configuration)
         {
-            _dbContext = new DynamoDBContext(new AmazonDynamoDBClient(RegionEndpoint.USEast2), new DynamoDBContextConfig() { TableNamePrefix = configuration["DynamoDBTablePrefix"] });
+            _dbContext = new DynamoDBContext(new AmazonDynamoDBClient(RegionEndpoint.USEast2), new DynamoDBContextConfig());
             _dconfig = new DynamoDBOperationConfig();
         }
 
@@ -54,6 +54,7 @@ namespace deckbuilder.DataAccess
 
         public void Save(Deck deck)
         {
+            
             _dbContext.SaveAsync(deck).Wait();
         }
     }

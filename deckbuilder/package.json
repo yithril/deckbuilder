@@ -24,5 +24,8 @@
     "global": "^4.4.0",
     "serverless": "^1.78.0",
     "serverless-domain-manager": "^4.2.0"
+  },
+  "dependencies": {
+    "serverless-offline": "^6.8.0"
   }
 }
